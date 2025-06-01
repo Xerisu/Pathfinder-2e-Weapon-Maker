@@ -4,10 +4,10 @@
 
 // Svelte Colors!
 @use '@material/theme/index' as theme with (
-  $primary: #ff3e00,
-  $secondary: #676778,
-  $surface: #fff,
-  $background: #fff,
+  $primary: #00a824,
+  $secondary: #67786a,
+  $surface: #fffdfa,
+  $background: #fffdfa,
   $error: color-palette.$red-900
 );
 
