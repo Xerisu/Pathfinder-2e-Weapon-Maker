@@ -9,5 +9,11 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide'
 		})
-	]
+	],
+	server: {
+		allowedHosts: ['kasia2.lank891.pl']
+	},
+	preview: {
+		allowedHosts: ['kasia2.lank891.pl']
+	}
 });
