@@ -32,9 +32,10 @@
     loading = true;
 
     let error : string | undefined = undefined;
+    const apiDomain = "api.kasia2.lank891.pl"
 
     try {
-      const res : Response = await fetch('http://localhost:3000/weapons/random');
+      const res : Response = await fetch(`http://${apiDomain}/weapons/random`);
 
       if(res.ok) {
         const json = (await res.json()) as WeaponPropertiesModel;
