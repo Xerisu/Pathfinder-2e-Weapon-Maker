@@ -2,8 +2,9 @@ import express, { Request, Response } from 'express';
 import path from 'path';
 import { type WeaponProperties, weaponPropertiesToFoundryJson } from './types/weapon-properties';
 import GetRandomWeapon from './random-weapons';
-import * as fs from 'fs';
+import { promises as fs } from 'fs';
 import { v6 as uuid6 } from 'uuid';
+import slugify from 'slugify';
 
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
@@ -36,36 +37,37 @@ app.post('/create-weapon', async (req: Request, res: Response) => {
 
     const uuid : string = uuid6();
     const fileName : string = `./temp-files/${uuid}.json`;
-    const sendFileOptions = {
-        root: path.join(__dirname, "..")
-    };
+    const exportFileName = slugify(weaponProperties.name, '_') + ".json"
 
-    fs.writeFileSync(fileName, weaponPropertiesJson as string, {});
+    await fs.writeFile(fileName, weaponPropertiesJson as string, {});
     console.log(`Created new weapon file: ${fileName}`);
-    res.sendFile(fileName, sendFileOptions, (err) => {
-        if(err) {
-            console.log(`Error on sending file ${fileName}: ${err}`);
-            res.status(500).send(err);
-        }
-        else {
-            console.log(`File sent: ${fileName}`);
-        }
+    res
+        .header("Access-Control-Expose-Headers", "Content-Disposition")
+        .download(fileName, exportFileName, (err) => {
+            if(err) {
+                console.log(`Error on sending file ${fileName}: ${err}`);
+                res.status(500).send(err);
+            }
+            else {
+                console.log(`File sent: ${fileName}`);
+            }
 
-        fs.unlinkSync(fileName);
-        console.log(`File removed: ${fileName}`);
-    });
+            fs.unlink(fileName);
+            console.log(`File removed: ${fileName}`);
+        });
 });
-  app.get('/weapons/random', async (req: Request, res: Response) => {
-      await delay(500);
-	  
-      const weapon : WeaponProperties = GetRandomWeapon();
-	  
-	  if(Math.random() < 0.2) {
-		  res.status(400).send('You should expect random errors!');
-	  } else {
-		  res.status(200).send(weapon);
-	  }  
-  });
+
+app.get('/weapons/random', async (req: Request, res: Response) => {
+    await delay(500);
+    
+    const weapon : WeaponProperties = GetRandomWeapon();
+    
+    if(Math.random() < 0.2) {
+        res.status(400).send('You should expect random errors!');
+    } else {
+        res.status(200).send(weapon);
+    }  
+});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
