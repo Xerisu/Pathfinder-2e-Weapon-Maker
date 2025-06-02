@@ -28,10 +28,10 @@
 
 <style>
     .wrapper {
-        margin-left: 30px;
+        margin-left: 50px;
 		display: grid;
 		grid-template-columns: 70% 30%;
-        margin-right: 30px;
+        margin-right: 50px;
     }
     .right {
         display: flex;
@@ -43,4 +43,13 @@
     .smaller-text {
         font-size: 0.8em; /* 80% wielkości rodzica */
     }
+
+    @media(max-width: 768px){ 
+    .wrapper {
+      margin-left: 10px;
+      margin-right: 10px;
+      display: grid;
+	  grid-template-columns: 70% 30%;
+    }
+  }
 </style>

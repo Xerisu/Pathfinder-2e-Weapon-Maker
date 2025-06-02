@@ -19,6 +19,7 @@
   import Randomweapon from "../components/RandomWeapon.svelte";
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Button, { Label } from '@smui/button';
+  import ExportWeapon from "../components/ExportWeapon.svelte";
 
   const traitsUniversal = (_: any) => {
     return [{ 
@@ -104,8 +105,15 @@
 
   <div class="choices-2">
     <Preview
-      {properties}
+      bind:properties={properties}
       traits={new Traits(rarity, chosenUniversalTraits, chosenMeleeTraits, chosenRangedTraits, properties.type)}
+    />
+
+    <ExportWeapon
+      weaponProperties={properties} 
+      traits={new Traits(rarity, chosenUniversalTraits, chosenMeleeTraits, chosenRangedTraits, properties.type)}
+      bind:errorDialogOpen={errorDialogOpen} 
+      bind:errorDialogMessage={errorDialogMessage} 
     />
 
     <Randomweapon 
@@ -143,10 +151,10 @@
 
 <style>
   .wrapper {
-    margin-left: 30px;
+    margin-left: 50px;
     display: grid;
     grid-template-columns: 1fr 50px 1fr;
-    margin-right: 100px;
+    margin-right: 50px;
   }
   .choices, .choices-2 {
     display: flex;
@@ -165,7 +173,8 @@
 
   @media(max-width: 768px){ 
     .wrapper {
-      margin-left: 30px;
+      margin-left: 10px;
+      margin-right: 10px;
       display: flex;
       flex-direction: column;
     }

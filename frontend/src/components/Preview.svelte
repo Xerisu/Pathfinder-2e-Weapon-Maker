@@ -1,6 +1,5 @@
 <script lang="ts">
-    import type Properties from "../types/properties.svelte";
-	import type { TransformOptions } from "vite";
+    import Properties from "../types/properties.svelte";
     import Traits from "../types/traits.svelte";
     import Details from "./Details.svelte";
     import Tags from "./Tags.svelte";
@@ -13,13 +12,13 @@
 
     let {
         traits,
-        properties
+        properties = $bindable<Properties>(undefined)
     }: Props = $props();
 </script>
 
 <div class="preview">
 	<div class="itemHeader">
-		<div style="float: left"><input type="text" id="Name" name="Name" value={properties.name} class="inputInherit customImput" placeholder={$t("preview.weaponName.placeholder", {})}></div>
+		<div style="float: left"><input type="text" id="Name" name="Name" bind:value={properties.name} class="inputInherit customImput" placeholder={$t("preview.weaponName.placeholder", {})}></div>
         <div style="float: right">{$t("preview.weapon", {})} 0</div>
         <div style="clear: both;"></div>
 	</div>
@@ -27,7 +26,15 @@
     <Tags traits = {traits}/>
     <Details properties = {properties}/>
 	<hr>
-    <textarea id="Description" name="Name" rows={properties.type === "melee" ? 10 : 7} style="resize: vertical;" class="inputInherit customImput description" placeholder="{$t("preview.weaponDescription.placeholder", {})}...">{properties.description}</textarea>
+    <textarea 
+        id="Description" 
+        name="Name" 
+        rows={properties.type === "melee" ? 10 : 7} 
+        style="resize: vertical;" 
+        class="inputInherit customImput description" 
+        placeholder="{$t("preview.weaponDescription.placeholder", {})}..." 
+        bind:value={properties.description}>
+    </textarea>
 </div>
 
 <style>

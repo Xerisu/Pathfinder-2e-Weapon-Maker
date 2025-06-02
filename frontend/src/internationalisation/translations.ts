@@ -95,6 +95,8 @@ const en = {
   "error.dialogConfirmationButton": "OK",
   "randomWeapon.label": "Get random weapon!",
   "randomWeapon.label.loading": "Loading...",
+  "exportWeapon.label": "Export weapon to FoundryVTT",
+  "exportWeapon.label.loading": "Loading...",
 };
 
 const pl : typeof en = {
@@ -189,6 +191,8 @@ const pl : typeof en = {
   "error.dialogConfirmationButton": "OK",
   "randomWeapon.label": "Pobierz losową broń!",
   "randomWeapon.label.loading": "Ładowanie...",
+  "exportWeapon.label": "Eksportuj broń do Foundry VTT",
+  "exportWeapon.label.loading": "Ładowanie...",
 }
 
 export const translations = {

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Dialog, { Title, Content, Actions, InitialFocus } from '@smui/dialog';
   import Button, { Label } from '@smui/button';
   import { t } from "../internationalisation/i18n";
   import Properties from '../types/properties.svelte';
@@ -27,15 +28,17 @@
   }: Props = $props();
 
   let loading = $state(false)
+  let open = $state(false);
 
   const GenerateWeapon = async () => {
     loading = true;
 
     let error : string | undefined = undefined;
-    const apiDomain = "api.kasia2.lank891.pl"
+    const apiDomain = "https://api.kasia2.lank891.pl"
+    //const apiDomain = "http://localhost:3000"
 
     try {
-      const res : Response = await fetch(`http://${apiDomain}/weapons/random`);
+      const res : Response = await fetch(`${apiDomain}/weapons/random`);
 
       if(res.ok) {
         const json = (await res.json()) as WeaponPropertiesModel;
@@ -96,8 +99,29 @@
      
 </script>
 
+<Dialog
+  bind:open
+  aria-labelledby="default-focus-title"
+  aria-describedby="default-focus-content"
+>
+  <Title id="default-focus-title">Confirmation</Title>
+  <Content id="default-focus-content">
+    Are you sure? This operation will overwrite your current weapon!
+  </Content>
+  <Actions>
+    <Button onclick={GenerateWeapon}>
+      <Label>Yes</Label>
+    </Button>
+    <Button
+      defaultAction
+      use={[InitialFocus]}
+    >
+      <Label>No</Label>
+    </Button>
+  </Actions>
+</Dialog>
 
-<Button onclick={GenerateWeapon} variant="raised" disabled={loading}>
+<Button onclick={() => (open = true)} variant="raised" disabled={loading}>
   <Label>{loading ? $t("randomWeapon.label.loading") : $t("randomWeapon.label")}</Label>
 </Button>
 
