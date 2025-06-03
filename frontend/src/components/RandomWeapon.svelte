@@ -104,19 +104,19 @@
   aria-labelledby="default-focus-title"
   aria-describedby="default-focus-content"
 >
-  <Title id="default-focus-title">Confirmation</Title>
+  <Title id="default-focus-title">{$t("randomWeapon.confirmation")}</Title>
   <Content id="default-focus-content">
-    Are you sure? This operation will overwrite your current weapon!
+    {$t("randomWeapon.confirmation.message")}
   </Content>
   <Actions>
     <Button onclick={GenerateWeapon}>
-      <Label>Yes</Label>
+      <Label>{$t("dialog.yes")}</Label>
     </Button>
     <Button
       defaultAction
       use={[InitialFocus]}
     >
-      <Label>No</Label>
+      <Label>{$t("dialog.no")}</Label>
     </Button>
   </Actions>
 </Dialog>

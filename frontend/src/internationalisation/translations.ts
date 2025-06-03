@@ -84,7 +84,7 @@ const en = {
   "traits.reach": "Reach",
   "traits.thrown": "Thrown",
   "traits.propulsive": "Propulsive",
-  "traits.volley30ft": "Volley 30 ft", // To wyjebać jak zrobię sensowne Volley
+  "traits.volley30ft": "Volley 30 ft", // To out jak zrobię sensowne Volley
   "traits.legend.universal": "Universal weapon traits",
   "traits.legend.melee": "Melee weapon traits",
   "traits.legend.ranged": "Ranged weapon traits",  
@@ -95,8 +95,12 @@ const en = {
   "error.dialogConfirmationButton": "OK",
   "randomWeapon.label": "Get random weapon!",
   "randomWeapon.label.loading": "Loading...",
+  "randomWeapon.confirmation": "Confirmation",
+  "randomWeapon.confirmation.message": "Are you sure? This operation will overwrite your current weapon!",
   "exportWeapon.label": "Export weapon to FoundryVTT",
   "exportWeapon.label.loading": "Loading...",
+  "dialog.yes": "Yes",
+  "dialog.no": "No",
 };
 
 const pl : typeof en = {
@@ -191,8 +195,12 @@ const pl : typeof en = {
   "error.dialogConfirmationButton": "OK",
   "randomWeapon.label": "Pobierz losową broń!",
   "randomWeapon.label.loading": "Ładowanie...",
+  "randomWeapon.confirmation": "Potwierdzenie",
+  "randomWeapon.confirmation.message": "Czy jesteś pewien? Ta operacja nadpisze twoją obecną broń!",
   "exportWeapon.label": "Eksportuj broń do Foundry VTT",
   "exportWeapon.label.loading": "Ładowanie...",
+  "dialog.yes": "Tak",
+  "dialog.no": "Nie",
 }
 
 export const translations = {
